@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="輸入資產與負債，算出你在《財富階梯》的哪一階、擁有哪一種消費自由，以及往下一階還差多少、要多久。" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>財富階梯定位器｜你在哪一階、下一步怎麼走</title>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap top-inner">
+        <span class="logo" aria-hidden="true"><i></i><i></i><i></i></span>
+        <strong>財富階梯定位器</strong>
+        <nav class="top-nav">
+          <a href="#where">我在哪一階</a>
+          <a href="#plan">還要多久</a>
+          <a class="hide-sm" href="https://github.com/eddielincursor/research/blob/main/tutorials/wealth-ladder.md">讀文章</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="intro">
+        <p class="eyebrow">依 Nick Maggiulli《財富階梯》（The Wealth Ladder）整理</p>
+        <h1>先用淨值找到位置，再用這一階最有效的槓桿往上爬</h1>
+        <p>填入資產和負債，工具會告訴你在六階裡的哪一階、對應哪一種消費自由、往下一階還差多少，以及照現在的速度大約要多久。數字只存在你的瀏覽器，不會上傳；網址會記住設定，方便存成書籤每季回來更新。</p>
+        <div class="intro-actions">
+          <button type="button" class="ghost" id="example-btn">帶入文章裡的例子</button>
+          <button type="button" class="ghost" id="reset-btn">全部清空</button>
+        </div>
+      </section>
+
+      <section class="card" id="inputs" aria-labelledby="inputs-title">
+        <div class="card-head">
+          <span class="step">1</span>
+          <div>
+            <h2 id="inputs-title">盤點資產與負債</h2>
+            <p>用今天的市值估算即可，不必精確到個位數。單位是新台幣。</p>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <fieldset class="group">
+            <legend>資產 <small>你擁有的</small></legend>
+            <div class="fields" id="asset-fields"></div>
+          </fieldset>
+          <fieldset class="group">
+            <legend>負債 <small>你還欠的</small></legend>
+            <div class="fields" id="debt-fields"></div>
+          </fieldset>
+        </div>
+
+        <div class="summary" id="summary"></div>
+
+        <div class="settings">
+          <div class="setting">
+            <span class="setting-label" id="basis-label">用哪個數字定位</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="basis-label" id="basis">
+              <button type="button" role="radio" data-basis="total">總淨值</button>
+              <button type="button" role="radio" data-basis="liquid">流動淨值</button>
+            </div>
+            <small class="setting-hint" id="basis-hint"></small>
+          </div>
+          <label class="setting">
+            <span class="setting-label">美元匯率</span>
+            <span class="input short"><em>1 美元 =</em><input id="fx" inputmode="decimal" autocomplete="off" /><em>元</em></span>
+            <small class="setting-hint">書中級距以美元計，預設 32，可依當下匯率調整。</small>
+          </label>
+        </div>
+      </section>
+
+      <section class="card" id="where" aria-labelledby="where-title">
+        <div class="card-head">
+          <span class="step">2</span>
+          <div>
+            <h2 id="where-title">你在哪一階</h2>
+            <p>每一階是上一階的 10 倍。同一階裡也很寬，所以一併看你在這一階的哪個位置。</p>
+          </div>
+        </div>
+
+        <div class="grid result-grid">
+          <div class="result" id="result"></div>
+          <ol class="ladder" id="ladder" aria-label="財富階梯六個級距"></ol>
+        </div>
+
+        <div class="carefree" id="carefree"></div>
+      </section>
+
+      <section class="card" id="strategy" aria-labelledby="strategy-title">
+        <div class="card-head">
+          <span class="step">3</span>
+          <div>
+            <h2 id="strategy-title">這一階該把力氣放在哪裡</h2>
+            <p>書裡每一階都有不同的主要引擎，也有最容易拖慢你的陷阱。</p>
+          </div>
+        </div>
+        <div id="strategy-body"></div>
+        <div class="insights-wrap">
+          <h3>依你的數字，特別要注意</h3>
+          <ul class="insights" id="insights"></ul>
+        </div>
+      </section>
+
+      <section class="card" id="plan" aria-labelledby="plan-title">
+        <div class="card-head">
+          <span class="step">4</span>
+          <div>
+            <h2 id="plan-title">往下一階還要多久</h2>
+            <p>用每月投入與假設報酬試算。報酬率是情境，不是承諾，建議多試幾個數字。</p>
+          </div>
+        </div>
+
+        <div class="grid plan-grid">
+          <div class="inputs">
+            <label class="field">
+              <span>每月可投入</span>
+              <span class="input"><em>NT$</em><input id="monthly" inputmode="numeric" autocomplete="off" /></span>
+              <small class="hint">存下來或投入投資帳戶的金額，可以用<a href="https://eddielincursor.github.io/research/budget/">薪水分配試算</a>先算。</small>
+            </label>
+            <div class="field">
+              <label for="rate">假設年化報酬率</label>
+              <div class="pair">
+                <span class="input short"><input id="rate" inputmode="decimal" autocomplete="off" /><em>%</em></span>
+                <input type="range" id="rate-range" min="0" max="10" step="0.5" aria-label="假設年化報酬率" />
+              </div>
+              <div class="chips" id="rate-presets">
+                <button type="button" data-rate="1.5">定存 1.5%</button>
+                <button type="button" data-rate="4">保守 4%</button>
+                <button type="button" data-rate="6">穩健 6%</button>
+                <button type="button" data-rate="8">積極 8%</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="years">希望幾年內到下一階</label>
+              <div class="pair">
+                <span class="input short"><input id="years" inputmode="numeric" autocomplete="off" /><em>年</em></span>
+                <input type="range" id="years-range" min="1" max="40" step="1" aria-label="希望幾年內到下一階" />
+              </div>
+            </div>
+            <label class="field">
+              <span>每月必要開銷 <small>選填，用來檢查緊急預備金</small></span>
+              <span class="input"><em>NT$</em><input id="expenses" inputmode="numeric" autocomplete="off" /></span>
+            </label>
+          </div>
+
+          <div class="outputs">
+            <div class="plan-stats" id="plan-stats"></div>
+            <figure class="chart">
+              <div id="chart"></div>
+              <figcaption id="chart-caption"></figcaption>
+            </figure>
+            <table class="milestones">
+              <thead>
+                <tr><th>目標</th><th>門檻（台幣）</th><th>照目前速度</th><th>大約年份</th></tr>
+              </thead>
+              <tbody id="milestones"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <p>級距與每一階的策略整理自 Nick Maggiulli《The Wealth Ladder》（2025）；美國家戶分布為作者在訪談中引用的約略數字。台幣門檻依你設定的匯率換算，台灣的房價、稅制與生活成本和美國不同，請把它當方向，不是考試分數。</p>
+        <p>試算假設報酬率每年固定、每月月底投入、中途不領，年化報酬率換成月利率用 (1+r)<sup>1/12</sup> − 1，未計稅費與通膨。結果不代表投資建議。</p>
+        <p>延伸閱讀：<a href="https://github.com/eddielincursor/research/blob/main/tutorials/wealth-ladder.md">《財富階梯》重點心得</a>・<a href="https://eddielincursor.github.io/research/budget/">薪水分配與投資試算</a></p>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
