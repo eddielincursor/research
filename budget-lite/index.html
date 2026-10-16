@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="輸入月收入，用 631、333、5311 或 50/30/20 分配薪水，再試算每月投入長期會累積多少。" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>薪水分配與投資試算（簡易版）</title>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap top-inner">
+        <span class="logo" aria-hidden="true"><i></i><i></i><i></i></span>
+        <strong>薪水分配與投資試算</strong>
+        <a class="back" href="https://github.com/eddielincursor/research/blob/main/tutorials/budgeting-ratios.md">回到教學</a>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="intro">
+        <h1>先分好每個月的薪水，再看投資那一格能長成多少</h1>
+        <p>數字只存在你的瀏覽器裡，不會上傳。網址會記住目前的設定，可以直接分享。</p>
+      </section>
+
+      <section class="card" aria-labelledby="budget-title">
+        <div class="card-head">
+          <span class="step">1</span>
+          <div>
+            <h2 id="budget-title">分配薪水</h2>
+            <p>填入稅後月收入，選一種分法。</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="inputs">
+            <label class="field">
+              <span>稅後月收入</span>
+              <span class="input"><em>NT$</em><input id="income" inputmode="numeric" autocomplete="off" /></span>
+            </label>
+            <label class="field">
+              <span>每月必要支出 <small>選填，用來檢查生活費夠不夠</small></span>
+              <span class="input"><em>NT$</em><input id="essentials" inputmode="numeric" autocomplete="off" /></span>
+            </label>
+            <div class="field">
+              <span id="method-label">分法</span>
+              <div class="methods" id="methods" role="radiogroup" aria-labelledby="method-label"></div>
+            </div>
+            <p class="note" id="recommend" hidden></p>
+          </div>
+
+          <div class="outputs">
+            <div class="bar" id="bar" aria-hidden="true"></div>
+            <ul class="buckets" id="buckets"></ul>
+            <p class="callout" id="fit" hidden></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="invest-title">
+        <div class="card-head">
+          <span class="step">2</span>
+          <div>
+            <h2 id="invest-title">投資試算</h2>
+            <p>每月投入預設帶入上面「投資」那一格，也可以自己改。</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="inputs">
+            <div class="field">
+              <label for="monthly">每月投入</label>
+              <span class="input"><em>NT$</em><input id="monthly" inputmode="numeric" autocomplete="off" /></span>
+              <small class="link-row" id="monthly-link"></small>
+            </div>
+            <label class="field">
+              <span>單筆投入 <small>一開始就有的本金</small></span>
+              <span class="input"><em>NT$</em><input id="initial" inputmode="numeric" autocomplete="off" /></span>
+            </label>
+            <div class="field">
+              <label for="rate">年化報酬率</label>
+              <div class="pair">
+                <span class="input short"><input id="rate" inputmode="decimal" autocomplete="off" /><em>%</em></span>
+                <input type="range" id="rate-range" min="0" max="12" step="0.5" aria-label="年化報酬率" />
+              </div>
+              <div class="chips" id="rate-presets">
+                <button type="button" data-rate="1.7">定存 1.7%</button>
+                <button type="button" data-rate="4">保守 4%</button>
+                <button type="button" data-rate="6">穩健 6%</button>
+                <button type="button" data-rate="8">積極 8%</button>
+              </div>
+            </div>
+            <div class="field">
+              <label for="years">投資年數</label>
+              <div class="pair">
+                <span class="input short"><input id="years" inputmode="numeric" autocomplete="off" /><em>年</em></span>
+                <input type="range" id="years-range" min="1" max="40" step="1" aria-label="投資年數" />
+              </div>
+            </div>
+          </div>
+
+          <div class="outputs">
+            <div class="hero">
+              <span>第 <b id="r-years"></b> 年底大約會有</span>
+              <strong id="r-final"></strong>
+              <small id="r-multiple"></small>
+            </div>
+            <div class="stats">
+              <div><span><i class="dot principal"></i>投入本金</span><b id="r-principal"></b></div>
+              <div><span><i class="dot gains"></i>累積報酬</span><b id="r-gains"></b></div>
+            </div>
+            <figure class="chart">
+              <div id="chart"></div>
+              <figcaption>
+                <span><i class="dot principal"></i>投入本金</span>
+                <span><i class="dot gains"></i>累積報酬</span>
+              </figcaption>
+            </figure>
+            <table class="milestones">
+              <thead>
+                <tr><th>年</th><th>投入本金</th><th>累積報酬</th><th>總額</th></tr>
+              </thead>
+              <tbody id="milestones"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <p>試算假設報酬率每年固定、每月月底投入，年化報酬率換成月利率用 (1+r)<sup>1/12</sup> − 1。實際報酬會有波動，結果不代表投資建議。</p>
+        <p>方法說明請看<a href="https://github.com/eddielincursor/research/blob/main/tutorials/budgeting-ratios.md">用同一筆薪水看懂 631、333、5311 和其他理財分法</a>。</p>
+      </footer>
+    </main>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
