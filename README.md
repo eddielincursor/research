@@ -10,7 +10,8 @@
 
 ## 小工具
 
-- [薪水分配與投資試算](finance-tools/README.md)：理財篇的網頁工具。先用財務規劃表依你選的分法算出每格金額，再把投資金額帶進投資計算機，用圖表看長期累積。
+- [薪水分配與投資試算（簡易版）](https://eddielincursor.github.io/research/budget/)：理財篇裡連結的線上版，部署在 GitHub Pages，原始碼在 [`budget-lite/`](budget-lite/README.md)。
+- [薪水分配與投資試算（完整版）](finance-tools/README.md)：理財篇的網頁工具。先用財務規劃表依你選的分法算出每格金額，再把投資金額帶進投資計算機，用圖表看長期累積。
 
 ## 怎麼讀
 
