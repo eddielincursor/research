@@ -6,6 +6,7 @@ on:
     paths:
       - "budget-lite/**"
       - "wealth-ladder/**"
+      - "dinotaeng/**"
       - "site-home/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -34,11 +35,15 @@ jobs:
           cache-dependency-path: |
             budget-lite/pnpm-lock.yaml
             wealth-ladder/pnpm-lock.yaml
+            dinotaeng/pnpm-lock.yaml
       - name: Build budget-lite
         working-directory: budget-lite
         run: pnpm install --frozen-lockfile && pnpm test && pnpm build
       - name: Build wealth-ladder
         working-directory: wealth-ladder
+        run: pnpm install --frozen-lockfile && pnpm test && pnpm build
+      - name: Build dinotaeng
+        working-directory: dinotaeng
         run: pnpm install --frozen-lockfile && pnpm test && pnpm build
       - name: Assemble site
         run: |
@@ -46,6 +51,7 @@ jobs:
           cp -r site-home/. _site/
           cp -r budget-lite/dist _site/budget
           cp -r wealth-ladder/dist _site/wealth-ladder
+          cp -r dinotaeng/dist _site/dinotaeng
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
