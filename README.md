@@ -17,6 +17,7 @@
 
 ## 小工具
 
+- [財富階梯定位器](https://eddielincursor.github.io/research/wealth-ladder/)：搭配《財富階梯》心得。輸入資產與負債，算出你在哪一階、對應哪一種自由、往下一階還差多少與大約要多久。原始碼在 [`wealth-ladder/`](wealth-ladder/README.md)。
 - [薪水分配與投資試算（簡易版）](https://eddielincursor.github.io/research/budget/)：理財篇裡連結的線上版，部署在 GitHub Pages，原始碼在 [`budget-lite/`](budget-lite/README.md)。
 - [薪水分配與投資試算（完整版）](finance-tools/README.md)：理財篇的網頁工具。先用財務規劃表依你選的分法算出每格金額，再把投資金額帶進投資計算機，用圖表看長期累積。
 
