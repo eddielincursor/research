@@ -2,6 +2,8 @@
 
 這篇說明如何在 Windows 上下載 Ubuntu，用 Rufus 做成可開機的安裝隨身碟，再在目標電腦安裝 Ubuntu Desktop，並完成第一次登入後的基本設定。
 
+![照這五步做完：下載映像檔、寫入隨身碟、從 USB 開機、安裝系統、第一次設定](images/flow.png)
+
 寫作時核對的版本：
 
 | 項目 | 版本 |
@@ -13,7 +15,9 @@
 
 工作用電腦選 **26.04.1 LTS**。LTS 有五年免費安全更新，支援到 2031 年 4 月。同時間的 Ubuntu 26.10 只有九個月更新，不適合拿來當長期使用的工作機。
 
-## 開始之前
+## <img src="images/icon-warning.png" alt="" width="40"> 開始之前
+
+![這兩步會清掉資料：Rufus 會清空整支 USB；若選清除磁碟並安裝，目標硬碟上的系統與檔案也會消失](images/warning-erase.png)
 
 這份流程會做兩次無法復原的寫入：
 
@@ -24,6 +28,8 @@
 
 準備這些東西：
 
+![要準備 Windows 電腦、16 GB 以上 USB、目標電腦，以及可以上網的環境](images/prepare.png)
+
 - 一台可以上網的 Windows 電腦，用來下載檔案與執行 Rufus。
 - 一支 **16 GB 或更大** 的 USB 隨身碟。Ubuntu 映像檔約 6 GB，官方安裝說明建議至少 12 GB，16 GB 比較不會在寫入時空間不夠。
 - 要安裝 Ubuntu 的電腦。建議規格是雙核心 2 GHz 以上、記憶體 6 GB、可用磁碟空間 25 GB，以及一個 USB 埠。
@@ -31,7 +37,7 @@
 
 Rufus 只跑在 Windows。這篇假設你在另一台已經能用的 Windows 上製作隨身碟，再拿到目標電腦開機。
 
-## 1. 下載 Ubuntu 映像檔
+## <img src="images/icon-download.png" alt="" width="40"> 1. 下載 Ubuntu 映像檔
 
 1. 打開 Ubuntu 桌面版下載頁：<https://ubuntu.com/download/desktop>
 2. 找到 **Ubuntu 26.04.1 LTS**。
@@ -44,7 +50,7 @@ Rufus 只跑在 Windows。這篇假設你在另一台已經能用的 Windows 上
 
 把檔案放在找得到的位置，例如 `下載` 資料夾。不要解壓縮，Rufus 要的就是這個 `.iso`。
 
-### 核對檔案沒有下壞
+### <img src="images/icon-check.png" alt="" width="32"> 核對檔案沒有下壞
 
 下載頁旁的校驗碼清單在：
 
@@ -70,7 +76,7 @@ PowerShell 顯示的是大寫。和上面那串比對時不分大小寫，字元
 certutil -hashfile ubuntu-26.04.1-desktop-amd64.iso SHA256
 ```
 
-## 2. 下載 Rufus
+## <img src="images/icon-download.png" alt="" width="40"> 2. 下載 Rufus
 
 只從 Rufus 官網下載，避免拿到被改過的程式：
 
@@ -82,7 +88,11 @@ certutil -hashfile ubuntu-26.04.1-desktop-amd64.iso SHA256
 
 執行時 Windows 會要求系統管理員權限，按「是」。Rufus 要直接寫入磁碟，所以需要這個權限。
 
-## 3. 用 Rufus 做成開機碟
+## <img src="images/icon-usb.png" alt="" width="40"> 3. 用 Rufus 做成開機碟
+
+寫入之前，先用這張對照卡看過每一個欄位。
+
+![Rufus 設定對照卡：GPT、UEFI、檔案系統維持自動、持久分割區 0、ISO Image mode](images/rufus-settings.png)
 
 1. 插入要拿來安裝的 USB 隨身碟。
 2. 打開 Rufus。
@@ -99,7 +109,9 @@ certutil -hashfile ubuntu-26.04.1-desktop-amd64.iso SHA256
 | 叢集大小 (Cluster size) | 預設值 |
 | 持久分割區大小 | 0（這是安裝碟，不需要把試用環境的變更存回隨身碟） |
 
-Ubuntu 26.04.1 的映像檔裡有超過 4 GB 的檔案。FAT32 單檔不能超過 4 GB，所以 Rufus 可能把檔案系統改成 NTFS，並加上 UEFI:NTFS，UEFI 電腦才開得起來。看到檔案系統變成 NTFS 是正常的，不要手動改回 FAT32。
+Ubuntu 26.04.1 的映像檔裡有超過 4 GB 的檔案。FAT32 單檔不能超過 4 GB，所以 Rufus 可能把檔案系統改成 NTFS，並加上 UEFI:NTFS，UEFI 電腦才開得起來。
+
+<img src="images/icon-tip.png" alt="" width="28"> 看到檔案系統變成 NTFS 是正常的，不要手動改回 FAT32。
 
 **清單 USB 硬碟 (List USB Hard Drives)** 保持不要勾。勾了之後內接硬碟也可能出現在裝置清單，選錯就會把工作資料清掉。
 
@@ -110,7 +122,7 @@ Ubuntu 26.04.1 的映像檔裡有超過 4 GB 的檔案。FAT32 單檔不能超�
 10. 等到狀態列變成 **READY**，綠色進度跑完即可。6 GB 的映像檔依 USB 速度，大約要數分鐘到十幾分鐘。
 11. 按關閉，再用工作列的「安全地移除硬體」退出隨身碟。不要在寫入中途拔除。
 
-## 4. 用隨身碟開機
+## <img src="images/icon-boot.png" alt="" width="40"> 4. 用隨身碟開機
 
 1. 把隨身碟插到要安裝 Ubuntu 的電腦。桌機優先插主機背面的 USB 埠。
 2. 開機或重新啟動。目標電腦若目前是 Windows，請用「重新啟動」，不要用「關機」。Windows 的快速啟動會讓關機變成休眠，開機選單可能不會出現。
@@ -132,7 +144,7 @@ Ubuntu 26.04.1 的映像檔裡有超過 4 GB 的檔案。FAT32 單檔不能超�
 
 選單裡的名稱可能是隨身碟廠牌，或是 `UEFI: <廠牌>`。有 UEFI 與一般兩行時，選 **UEFI** 那一行。
 
-Ubuntu 的開機載入程式有簽章，**Secure Boot 保持啟用**即可，不必為了安裝去關掉它。
+<img src="images/icon-shield.png" alt="" width="28"> Ubuntu 的開機載入程式有簽章，**Secure Boot 保持啟用**即可，不必為了安裝去關掉它。
 
 開機後若看到 GRUB 選單，選 **Try or Install Ubuntu**。
 
@@ -145,9 +157,11 @@ Ubuntu 的開機載入程式有簽章，**Secure Boot 保持啟用**即可，不
 - 回到製作端，用第 1 節的 SHA256 再驗一次 ISO。不符就重新下載、重新寫入。
 - 仍開不了機時，用同一支 USB 再跑一次 Rufus，在 ISOHybrid 那個對話框改選 **DD Image mode**。
 
-## 5. 安裝 Ubuntu
+## <img src="images/icon-install.png" alt="" width="40"> 5. 安裝 Ubuntu
 
 安裝程式的畫面可以用英文或中文。第一步先把語言改成需要的語言，後面的按鈕就會跟著變。下面用功能說明，並附上英文介面上的名稱，方便對照。
+
+![安裝時這樣選：繁體中文、English (US) 鍵盤、Install Ubuntu、清除磁碟前先備份、登入需要密碼、時區台北](images/install-choices.png)
 
 1. **語言。** 選 **中文（繁體）**。工作環境若要維持英文介面，就留 English。
 2. **無障礙功能。** 沒有特別需求就繼續。
@@ -172,7 +186,9 @@ Ubuntu 的開機載入程式有簽章，**Secure Boot 保持啟用**即可，不
 
 沒有拔掉就重新開機的話，電腦可能又進安裝程式。拔掉後再重開即可，硬碟上的安裝不會因此消失。
 
-## 6. 第一次進入系統後的設定
+## <img src="images/icon-settings.png" alt="" width="40"> 6. 第一次進入系統後的設定
+
+![第一次進系統要做的四件事：登入、區域與時間、立刻更新、驅動與防火牆](images/first-boot.png)
 
 拔掉 USB 並重新開機後，應看到 Ubuntu 登入畫面。輸入安裝時設定的密碼。
 
@@ -244,7 +260,7 @@ sudo ufw status
 
 到這裡，安裝碟的工作就結束了。隨身碟可以留著以後重裝，也可以格式化改作一般使用。
 
-## 常見狀況
+## <img src="images/icon-warning.png" alt="" width="40"> 常見狀況
 
 **Rufus 的裝置清單是空的。** 換一個埠再插一次。隨身碟若被其他程式佔用，先關閉檔案總管裡該磁碟的視窗。不要為了找裝置去勾「清單 USB 硬碟」，除非你確定自己認得哪一顆是 USB。
 
