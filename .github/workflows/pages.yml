@@ -1,0 +1,62 @@
+name: Deploy budget-lite to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "budget-lite/**"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: budget-lite
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: budget-lite/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+      - run: pnpm build
+      - name: Assemble site
+        run: |
+          mkdir -p ../_site
+          cp -r dist ../_site/budget
+          cat > ../_site/index.html <<'EOF'
+          <!doctype html>
+          <meta charset="utf-8">
+          <meta http-equiv="refresh" content="0; url=./budget/">
+          <title>薪水分配與投資試算</title>
+          <a href="./budget/">前往薪水分配與投資試算</a>
+          EOF
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}budget/
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
