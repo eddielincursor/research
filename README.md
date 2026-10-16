@@ -10,6 +10,10 @@
 - [《財富階梯》重點心得](tutorials/wealth-ladder.md)：用淨值六個級距、0.01% 法則與每一階該換的引擎，整理 Nick Maggiulli 的財富階梯，並用台灣生活例子試算爬梯需要多久。
 - [《高功能倖存者：如果不「有用」，我還值得被愛嗎？》重點心得](tutorials/high-functioning-survivor.md)：整理周慕姿以家庭系統理論拆解的「白雪公主」與「灰姑娘」兩條創傷劇本，搭配職場、家庭與伴侶的生活例子，以及拆解「勞役合約」的五步驟練習。
 
+## 心理學專欄
+
+- [榮格心理學入門](tutorials/jung-psychology-intro.md)：用生活例子介紹心靈三層結構、人格面具／陰影／阿尼瑪與阿尼姆斯／自性、心理類型與個體化，給想接觸心理學的人當第一張地圖。
+
 ## 小工具
 
 - [薪水分配與投資試算（簡易版）](https://eddielincursor.github.io/research/budget/)：理財篇裡連結的線上版，部署在 GitHub Pages，原始碼在 [`budget-lite/`](budget-lite/README.md)。
