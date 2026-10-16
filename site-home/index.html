@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>理財小工具</title>
+    <style>
+      :root {
+        --bg: #f6f1e8;
+        --fg: #1b2430;
+        --muted: #5d6673;
+        --card: #fffcf7;
+        --line: #e5dccd;
+        color: var(--fg);
+        background: var(--bg);
+        font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+        line-height: 1.6;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        width: min(760px, 100% - 32px);
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+      h1 {
+        margin: 0 0 6px;
+        font-size: clamp(26px, 5vw, 34px);
+      }
+      p {
+        margin: 0;
+        color: var(--muted);
+      }
+      ul {
+        list-style: none;
+        margin: 28px 0 0;
+        padding: 0;
+        display: grid;
+        gap: 14px;
+      }
+      a.tool {
+        display: block;
+        padding: 20px 22px;
+        border: 1px solid var(--line);
+        border-left: 6px solid var(--c);
+        border-radius: 14px;
+        background: var(--card);
+        color: inherit;
+        text-decoration: none;
+        transition: transform 0.15s, box-shadow 0.15s;
+      }
+      a.tool:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgb(27 36 48 / 8%);
+      }
+      a.tool b {
+        font-size: 19px;
+      }
+      footer {
+        margin-top: 32px;
+        font-size: 13px;
+      }
+      footer a {
+        color: #0f6e6a;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>理財小工具</h1>
+      <p>搭配教學文章使用的免安裝網頁工具，數字只存在你的瀏覽器。</p>
+      <ul>
+        <li>
+          <a class="tool" href="./wealth-ladder/" style="--c: #e95420">
+            <b>財富階梯定位器</b>
+            <p>輸入資產與負債，看你在《財富階梯》的哪一階、擁有哪一種自由，往下一階還差多少、要多久。</p>
+          </a>
+        </li>
+        <li>
+          <a class="tool" href="./budget/" style="--c: #0f6e6a">
+            <b>薪水分配與投資試算</b>
+            <p>用 631、333、5311 等比例分配月薪，並試算定期投入的複利成長。</p>
+          </a>
+        </li>
+      </ul>
+      <footer>
+        <p>原始碼與文章：<a href="https://github.com/eddielincursor/research">github.com/eddielincursor/research</a></p>
+      </footer>
+    </main>
+  </body>
+</html>

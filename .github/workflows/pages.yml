@@ -1,10 +1,12 @@
-name: Deploy budget-lite to GitHub Pages
+name: Deploy tools to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
       - "budget-lite/**"
+      - "wealth-ladder/**"
+      - "site-home/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -20,9 +22,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: budget-lite
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -32,21 +31,21 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-          cache-dependency-path: budget-lite/pnpm-lock.yaml
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm test
-      - run: pnpm build
+          cache-dependency-path: |
+            budget-lite/pnpm-lock.yaml
+            wealth-ladder/pnpm-lock.yaml
+      - name: Build budget-lite
+        working-directory: budget-lite
+        run: pnpm install --frozen-lockfile && pnpm test && pnpm build
+      - name: Build wealth-ladder
+        working-directory: wealth-ladder
+        run: pnpm install --frozen-lockfile && pnpm test && pnpm build
       - name: Assemble site
         run: |
-          mkdir -p ../_site
-          cp -r dist ../_site/budget
-          cat > ../_site/index.html <<'EOF'
-          <!doctype html>
-          <meta charset="utf-8">
-          <meta http-equiv="refresh" content="0; url=./budget/">
-          <title>薪水分配與投資試算</title>
-          <a href="./budget/">前往薪水分配與投資試算</a>
-          EOF
+          mkdir -p _site
+          cp -r site-home/. _site/
+          cp -r budget-lite/dist _site/budget
+          cp -r wealth-ladder/dist _site/wealth-ladder
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -56,7 +55,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}budget/
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
