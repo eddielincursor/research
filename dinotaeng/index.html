@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="認識韓國療癒插畫品牌 Dinotaeng：棉花糖村 Marshville 的短尾矮袋鼠 Quokka 和朋友們，還有棉花糖接接樂小遊戲與角色測驗。" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>歡迎來到棉花糖村｜Dinotaeng 角色介紹與小遊戲</title>
+  </head>
+  <body>
+    <a class="skip" href="#characters">跳到角色介紹</a>
+    <header class="top">
+      <div class="wrap top-inner">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>棉花糖村導覽</span>
+        </a>
+        <nav class="top-nav" aria-label="頁面導覽">
+          <a href="#characters">角色</a>
+          <a href="#game-section">小遊戲</a>
+          <a href="#quiz">測驗</a>
+          <a class="hide-sm" href="#story">品牌故事</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap hero-inner">
+          <div class="hero-copy">
+            <p class="pill">韓國療癒系插畫品牌・非官方粉絲導覽</p>
+            <h1>歡迎來到<br /><span class="hl">棉花糖村</span><small class="h1-en">Marshville</small></h1>
+            <p class="lead">Dinotaeng（다이노탱）的世界裡住著一群短尾矮袋鼠。他們有點笨拙、常常出包，但每天都很認真地做同一件事：找到世界上最好吃的棉花糖。</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#characters">認識角色</a>
+              <a class="btn" href="#game-section">玩棉花糖接接樂</a>
+            </div>
+          </div>
+          <div class="hero-scene" id="hero-scene" aria-hidden="true"></div>
+        </div>
+        <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 40 C240 90 480 0 720 30 S1200 80 1440 30 V80 H0Z" /></svg>
+      </section>
+
+      <section class="section" id="story" aria-labelledby="story-title">
+        <div class="wrap">
+          <p class="kicker">About</p>
+          <h2 id="story-title">Dinotaeng 是什麼？</h2>
+          <div class="facts">
+            <article class="fact">
+              <span class="fact-num">2018</span>
+              <h3>一間插畫工作室</h3>
+              <p>韓國插畫家 Kim Tae Eun（김태은）創立的品牌，用動物的視角記錄平凡又幸福的日常。</p>
+            </article>
+            <article class="fact">
+              <span class="fact-num">Quokka</span>
+              <h3>主角是短尾矮袋鼠</h3>
+              <p>Quokka 是澳洲的小型袋鼠，大小和貓差不多，愛爬樹叢、不太怕人，常被說是「世界上最快樂的動物」。</p>
+            </article>
+            <article class="fact">
+              <span class="fact-num">Marsh</span>
+              <h3>全村的夢想是棉花糖</h3>
+              <p>故事發生在棉花糖村。品牌想傳達的是：不必完美，也能找到屬於自己的幸福。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft" id="characters" aria-labelledby="characters-title">
+        <div class="wrap">
+          <p class="kicker">Characters</p>
+          <h2 id="characters-title">棉花糖村的居民</h2>
+          <p class="section-lead">點一下角色卡，看他們的故事和生活裡的「這不就是我朋友嗎」時刻。</p>
+          <div class="filters" role="group" aria-label="篩選角色">
+            <button type="button" class="chip" data-filter="all" aria-pressed="true">全部</button>
+            <button type="button" class="chip" data-filter="trio" aria-pressed="false">三人組</button>
+            <button type="button" class="chip" data-filter="family" aria-pressed="false">Quokka 一家</button>
+            <button type="button" class="chip" data-filter="village" aria-pressed="false">村民與夥伴</button>
+          </div>
+          <ul class="cards" id="cards"></ul>
+        </div>
+      </section>
+
+      <section class="section" id="map" aria-labelledby="map-title">
+        <div class="wrap">
+          <p class="kicker">Relationship</p>
+          <h2 id="map-title">誰和誰是什麼關係？</h2>
+          <div class="relations" id="relations"></div>
+        </div>
+      </section>
+
+      <section class="section soft" id="game-section" aria-labelledby="game-title">
+        <div class="wrap game-wrap">
+          <div class="game-copy">
+            <p class="kicker">Mini game</p>
+            <h2 id="game-title">棉花糖接接樂</h2>
+            <p>Mr. Burnt 的棉花糖機又失控了，天空開始下棉花糖！幫 Quokka 用籃子接住，順便躲開烤焦的那幾顆。</p>
+            <ul class="tips">
+              <li>爸爸最愛的甜甜圈值 3 分，金色棉花糖值 5 分。</li>
+              <li>接到 BOBO，他會陪你 6 秒，這段時間分數加倍。</li>
+              <li>連續接住不漏接，倍率最高到 ×3。</li>
+              <li>最高分只存在你的瀏覽器。</li>
+            </ul>
+          </div>
+          <div class="game" id="game">
+            <div class="hud">
+              <div><span>分數</span><b id="hud-score">0</b></div>
+              <div><span>時間</span><b id="hud-time">60</b></div>
+              <div><span>最高分</span><b id="hud-best">0</b></div>
+              <div class="lives" id="hud-lives" role="img"></div>
+            </div>
+            <div class="stage">
+              <canvas id="game-canvas" tabindex="0" aria-label="棉花糖接接樂遊戲畫面"></canvas>
+              <div class="overlay" id="game-overlay"></div>
+            </div>
+            <p class="hud-status" id="hud-status" aria-live="polite"></p>
+            <div class="game-controls">
+              <button type="button" class="pad" id="move-left" aria-label="往左">◀</button>
+              <button type="button" class="btn small" id="game-pause" aria-pressed="false">暫停</button>
+              <button type="button" class="pad" id="move-right" aria-label="往右">▶</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="quiz" aria-labelledby="quiz-title">
+        <div class="wrap narrow">
+          <p class="kicker">Quiz</p>
+          <h2 id="quiz-title">你是棉花糖村的哪一位？</h2>
+          <p class="section-lead">五個問題，憑直覺選就好。</p>
+          <div class="quiz" id="quiz-box"></div>
+        </div>
+      </section>
+
+      <section class="section soft" id="timeline" aria-labelledby="timeline-title">
+        <div class="wrap narrow">
+          <p class="kicker">Timeline</p>
+          <h2 id="timeline-title">從首爾到台灣的足跡</h2>
+          <ol class="timeline" id="timeline-list"></ol>
+          <p class="note">快閃店的商品多半限量、賣完不補，想入手可以追蹤官方帳號的公告。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap">
+        <p>這是非官方的粉絲介紹頁。頁面上的角色插圖是依角色特徵自行繪製的簡化示意，不是官方造型；正式的角色圖、商品與活動資訊請看 <a href="https://en.dinotaeng.com/">Dinotaeng 官方網站</a> 與 <a href="https://www.instagram.com/dinotaeng/">Instagram @dinotaeng</a>。角色名稱與設定版權屬於 DINOTAENG。</p>
+        <p>延伸閱讀：<a href="https://github.com/eddielincursor/research/blob/main/tutorials/dinotaeng.md">Dinotaeng 角色介紹文章</a></p>
+      </div>
+    </footer>
+
+    <dialog class="char-dialog" id="char-dialog" aria-labelledby="dlg-title">
+      <div class="dlg-inner" id="dlg-body"></div>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
