@@ -50,6 +50,33 @@ button, input { font: inherit; color: inherit; }
 .big.med { border-top: 6px solid var(--med); }
 .big.med span, .big.med b { color: var(--med); }
 .gap-line { margin-top: 14px; font-size: 15px; }
+.aside-link { margin-top: 8px; font-size: 15px; font-weight: 800; }
+
+.section.july { background: #f8efe6; border-block: 1px solid var(--line); }
+.subhead { margin: 20px 0 6px; font-size: 22px; }
+.july-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+.jcard { display: flex; flex-direction: column; min-width: 0; padding: 14px 16px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line); }
+.jcard span { font-size: 13px; font-weight: 800; color: var(--muted); }
+.jcard b { font-size: clamp(28px, 4vw, 40px); line-height: 1.15; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.jcard small { margin-top: 6px; color: var(--muted); font-size: 13px; }
+.jcard.med { border-top: 4px solid var(--med); }
+.jcard.med b { color: var(--med); }
+.jcard.record { border-top: 4px solid var(--avg); background: #fff7f2; }
+.jcard.record b { color: var(--avg); }
+.cmp { width: 100%; border-collapse: collapse; margin: 4px 0 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.cmp th, .cmp td { padding: 10px 12px; text-align: right; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; vertical-align: top; }
+.cmp tr:last-child td { border-bottom: 0; }
+.cmp th:first-child, .cmp td:first-child { text-align: left; font-weight: 800; }
+.cmp thead th { background: var(--soft); font-size: 13px; }
+.cmp td small, .cmp th small { display: block; font-weight: 600; color: var(--muted); font-size: 12px; }
+.jtable { display: grid; margin: 8px 0 16px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--paper); }
+.jrow { display: grid; grid-template-columns: minmax(108px, 1.2fr) repeat(4, minmax(0, 1fr)); gap: 8px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; font-size: 14px; }
+.jrow.head { border-top: 0; background: var(--soft); font-size: 12px; font-weight: 800; color: var(--muted); }
+.jrow .who { font-weight: 800; }
+.jrow .who small { display: block; font-weight: 600; color: var(--muted); }
+.jcell b { font-weight: 800; }
+.jcell em { display: block; font-style: normal; font-size: 12px; font-weight: 700; color: var(--ok); }
+.jcell em.down { color: var(--avg); }
 
 .section { padding: 28px 0 48px; scroll-margin-top: 64px; }
 .section.soft { background: color-mix(in srgb, var(--soft) 55%, var(--bg)); border-block: 1px solid var(--line); }
@@ -155,7 +182,18 @@ button, input { font: inherit; color: inherit; }
 .foot p { margin: 0 0 8px; }
 
 @media (max-width: 800px) {
-  .pair, .callouts, .defs, .stages, .check-grid { grid-template-columns: minmax(0, 1fr); }
+  .pair, .callouts, .defs, .stages, .check-grid, .july-cards { grid-template-columns: minmax(0, 1fr); }
+  .cmp thead { display: none; }
+  .cmp, .cmp tbody, .cmp tr, .cmp td { display: block; width: 100%; text-align: left; }
+  .cmp tr { padding: 10px 12px 12px; border-bottom: 1px solid var(--line); }
+  .cmp tr:last-child { border-bottom: 0; }
+  .cmp td { border: 0; padding: 2px 0; }
+  .cmp td:nth-child(2)::before { content: "114 年全年"; display: block; font-size: 12px; font-weight: 800; color: var(--muted); }
+  .cmp td:nth-child(3)::before { content: "115 年 7 月"; display: block; margin-top: 6px; font-size: 12px; font-weight: 800; color: var(--muted); }
+  .jrow { grid-template-columns: 1fr 1fr; }
+  .jrow.head { display: none; }
+  .jrow .who { grid-column: 1 / -1; }
+  .jcell::before { content: attr(data-k); display: block; font-size: 11px; font-weight: 800; color: var(--muted); }
   .trend { grid-template-columns: repeat(3, 1fr); }
   .hbar { grid-template-columns: 76px minmax(0, 1fr); }
   .hbar-val { grid-column: 2; text-align: left; margin-top: -4px; }
@@ -164,6 +202,8 @@ button, input { font: inherit; color: inherit; }
 @media (max-width: 480px) {
   .hide-sm { display: none; }
   .hero { padding-top: 28px; }
+  .top-inner { height: auto; min-height: 52px; padding-block: 8px; flex-wrap: wrap; }
+  .top-nav { margin-left: 0; }
   .top-nav a { padding: 6px 8px; font-size: 13px; }
   .lines b { font-size: 18px; }
   .diffs li { flex-direction: column; gap: 0; }

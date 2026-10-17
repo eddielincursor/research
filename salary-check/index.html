@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="用主計總處 114 年的數字，看懂平均薪資和中位數差在哪。輸入年紀和月薪，查出你在同齡的哪個位置。" />
+    <meta name="description" content="用主計總處 114 年全年的數字，看懂平均薪資和中位數差在哪。另有 115 年 7 月單月創新高的獨立比較。輸入年紀和月薪，查出你在同齡的哪個位置。" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>平均薪資和中位數差在哪｜你的月薪在同齡的哪裡</title>
   </head>
@@ -15,6 +15,7 @@
         <nav class="top-nav" aria-label="頁面導覽">
           <a href="#why">為什麼</a>
           <a href="#stages">各年齡及格線</a>
+          <a href="#july">7 月比較</a>
           <a href="#check">查我的位置</a>
           <a class="hide-sm" href="https://github.com/eddielincursor/research/blob/main/tutorials/salary-median.md">讀文章</a>
         </nav>
@@ -40,6 +41,7 @@
             </article>
           </div>
           <p class="gap-line">兩個數字相差 <b>9,478 元／月</b>，一年大約 11.4 萬。達到平均的人，大約已經贏過七成的受僱員工。</p>
+          <p class="aside-link"><a href="#july">115 年 7 月單月總薪資平均創新高，比較獨立放在後面</a></p>
         </div>
       </section>
 
@@ -70,7 +72,7 @@
             </article>
             <article>
               <h3>總薪資</h3>
-              <p>經常性薪資，再加加班費、績效獎金、年終。114 年 12 月全體總薪資平均 62,492 元，其中就有 14,092 元是加班費和獎金。看到「平均月薪 6 萬、7 萬」，先問是不是獎金月。</p>
+              <p>經常性薪資，再加加班費、績效獎金、年終。114 年 12 月全體總薪資平均 62,492 元，其中就有 14,092 元是加班費和獎金。看到「平均月薪 6 萬、7 萬」，先問是不是獎金月。115 年 7 月的 71,165 元就是這種數字，<a href="#july">獨立比較在後面</a>。</p>
             </article>
             <article>
               <h3>實質薪資</h3>
@@ -99,12 +101,28 @@
         </div>
       </section>
 
+      <section class="section july" id="july" aria-labelledby="july-title">
+        <div class="wrap">
+          <p class="kicker">獨立比較・115 年 7 月</p>
+          <h2 id="july-title">單月總薪資平均創新高，基準仍是去年全年</h2>
+          <p>2026 年 9 月 14 日，主計總處公布 115 年 7 月工業及服務業薪資。這個月的總薪資平均創下單月新高。下面把這個月和 114 年全年並排。及格線、十等分位，以及下一節的查詢，仍用 114 年全年。</p>
+          <div class="july-cards" id="july-cards"></div>
+          <p id="july-split"></p>
+          <div id="july-table"></div>
+          <p class="note" id="july-yoy"></p>
+          <h3 class="subhead">各年齡的經常性薪資，全年和 7 月並排</h3>
+          <p>兩欄都是每月經常性薪資，不含 7 月那筆獎金。中位數仍是各年齡的及格線；7 月的及格線整年還沒結算，所以工具不改用這一欄。</p>
+          <div id="july-ages"></div>
+          <ul class="limits" id="july-notes"></ul>
+        </div>
+      </section>
+
       <section class="section" id="check" aria-labelledby="check-title">
         <div class="wrap check-grid">
           <div>
             <p class="kicker">小工具</p>
             <h2 id="check-title">輸入年紀和月薪</h2>
-            <p>填薪資單上的本薪加每月固定津貼。加班費、年終、三節獎金先不要算進去，那些會讓位置看起來比較高。</p>
+            <p>填薪資單上的本薪加每月固定津貼。加班費、年終、三節獎金先不要算進去，那些會讓位置看起來比較高。對照用的是 114 年全年。<a href="#july">115 年 7 月的單月數字</a>只做比較，不拿來重算百分比。</p>
             <form class="form" id="form">
               <label class="field">
                 <span>年紀</span>
@@ -139,6 +157,7 @@
             <li><b>行業差很多。</b>113 年全年總薪資中位數，金融及保險業 110.6 萬、電子零組件 87.6 萬，住宿及餐飲業 41.5 萬。同齡比較會把不同行業混在一起。</li>
             <li><b>學歷也差很多。</b>同樣是 114 年的每月經常性薪資，研究所中位數 66,667 元，專科及大學 40,605 元。</li>
             <li><b>同齡百分比是粗估。</b>官方公布了全體的十分位，和各年齡的平均、中位數，但沒有公布各年齡的百分位。工具用 113 年各年齡全年總薪資的分布形狀來估計，請把它看成區間，不是名次。</li>
+            <li><b>115 年 7 月沒有百分位。</b>那個單月只有平均和中位數。查詢的百分比沿用 114 年全年的十分位。</li>
           </ul>
         </div>
       </section>
@@ -146,7 +165,8 @@
 
     <footer class="foot">
       <div class="wrap">
-        <p>資料來源：行政院主計總處《薪資及生產力統計新聞稿》114 年 12 月（115 年 2 月 11 日發布）表 6、表 9；113 年薪資中位數及分布統計表 3、表 5。114 年全年數字為初步統計。當時每月最低工資 28,590 元；115 年 1 月 1 日起已調整為 29,500 元，全年統計要等主計總處下次發布。</p>
+        <p>資料來源：行政院主計總處《薪資及生產力統計新聞稿》114 年 12 月（115 年 2 月 11 日發布）表 6、表 9；113 年薪資中位數及分布統計表 3、表 5。114 年全年數字為初步統計。當時每月最低工資 28,590 元；115 年 1 月 1 日起已調整為 29,500 元。</p>
+        <p>115 年 7 月的單月比較，來源是《115 年 7 月工業及服務業薪資統計結果》（115 年 9 月 14 日發布）表 1、表 2、表 5、表 6。該月為初步統計。1 至 7 月累計與 7 月單月是兩組數字。</p>
         <p>這是位置對照，不是薪資建議，也不能用來判斷一份工作值不值得。數字只留在你的瀏覽器。</p>
         <p>延伸閱讀：<a href="https://github.com/eddielincursor/research/blob/main/tutorials/salary-median.md">平均薪資和中位數，一篇看懂</a>・<a href="https://eddielincursor.github.io/research/budget/">薪水分配試算</a>・<a href="https://eddielincursor.github.io/research/wealth-ladder/">財富階梯定位器</a></p>
       </div>

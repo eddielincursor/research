@@ -1,6 +1,8 @@
 import "./style.css"
 import {
   DECILES,
+  JULY,
+  FULL_TIME,
   OVERALL,
   STAGES,
   agePercent,
@@ -50,6 +52,82 @@ function renderBars() {
       <span class="hbar-val">${money(v)}${tag ? `<em>${tag}</em>` : ""}</span>
     </div>`
   }).join("")
+}
+
+function signed(n: number): string {
+  const v = Math.round(n)
+  if (v > 0) return `+${money(v)}`
+  if (v < 0) return `−${money(-v)}`
+  return "0"
+}
+
+function renderJuly() {
+  const spread = Math.round(OVERALL.annualTotal / 12)
+  const bonus = JULY.irregular - JULY.overtime
+  $("july-cards").innerHTML = `
+    <article class="jcard">
+      <span>7 月經常性平均</span>
+      <b>${money(JULY.average)}</b>
+      <small>比 114 年全年的 ${money(OVERALL.average)} 多 ${money(JULY.average - OVERALL.average)} 元</small>
+    </article>
+    <article class="jcard med">
+      <span>7 月經常性中位數</span>
+      <b>${money(JULY.median)}</b>
+      <small>比 114 年全年的 ${money(OVERALL.median)} 多 ${money(JULY.median - OVERALL.median)} 元</small>
+    </article>
+    <article class="jcard record">
+      <span>7 月總薪資平均・單月新高</span>
+      <b>${money(JULY.total)}</b>
+      <small>固定薪水 ${money(JULY.average)}，加上獎金及加班費 ${money(JULY.irregular)}</small>
+    </article>`
+
+  $("july-split").textContent = `71,165 元是 7 月單月的總薪資平均：經常性薪資 ${money(JULY.average)} 元，加上獎金及加班費 ${money(JULY.irregular)} 元。加班費是 ${money(JULY.overtime)} 元，相減之後約 ${money(bonus)} 元是獎金和其他不是每月固定的項目。7 月常發員工酬勞、年中獎金和績效獎金，和 114 年 12 月總薪資平均 62,492 元是同一類月份。`
+
+  $("july-table").innerHTML = `<table class="cmp">
+    <thead><tr><th></th><th>114 年全年</th><th>115 年 7 月</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>經常性平均</td>
+        <td>${money(OVERALL.average)}</td>
+        <td>${money(JULY.average)}<small>${signed(JULY.average - OVERALL.average)}</small></td>
+      </tr>
+      <tr>
+        <td>經常性中位數</td>
+        <td>${money(OVERALL.median)}</td>
+        <td>${money(JULY.median)}<small>${signed(JULY.median - OVERALL.median)}</small></td>
+      </tr>
+      <tr>
+        <td>總薪資平均</td>
+        <td>${money(OVERALL.annualTotal)}<small>全年合計，除以 12 是 ${money(spread)}</small></td>
+        <td>${money(JULY.total)}<small>獎金集中的單月</small></td>
+      </tr>
+    </tbody>
+  </table>`
+
+  $("july-yoy").innerHTML = `和上年 7 月比，才是主計總處寫的年增率：經常性平均 ${money(JULY.yoy.average)} → ${money(JULY.average)}（+${JULY.yoy.averagePct}%），中位數 ${money(JULY.yoy.median)} → ${money(JULY.median)}（+${JULY.yoy.medianPct}%），總薪資平均 ${money(JULY.yoy.total)} → ${money(JULY.total)}（+${JULY.yoy.totalPct}%）。固定薪水大約多 3%，總薪資多 8%，多出來的主要是這個月的獎金。`
+
+  $("july-ages").innerHTML = `<div class="jtable">${
+    `<div class="jrow head"><span>階段</span><span>114 年中位數</span><span>114 年平均</span><span>7 月中位數</span><span>7 月平均</span></div>` +
+    STAGES.map((s) => {
+      const month = JULY.ages.find((a) => a.id === s.id)!
+      const med = month.median - s.median
+      const avg = month.average - s.average
+      return `<div class="jrow">
+        <span class="who">${s.name}<small>${s.ages}</small></span>
+        <span class="jcell" data-k="114 年中位數"><b>${money(s.median)}</b></span>
+        <span class="jcell" data-k="114 年平均"><b>${money(s.average)}</b></span>
+        <span class="jcell" data-k="7 月中位數"><b>${money(month.median)}</b><em class="${med < 0 ? "down" : ""}">${signed(med)}</em></span>
+        <span class="jcell" data-k="7 月平均"><b>${money(month.average)}</b><em class="${avg < 0 ? "down" : ""}">${signed(avg)}</em></span>
+      </div>`
+    }).join("")
+  }</div>`
+
+  $("july-notes").innerHTML = `
+    <li>7 月沒有公布十等分位，也沒有各年齡的百分位。下面的查詢仍用 114 年全年，百分比不按 7 月重算。</li>
+    <li>1 至 7 月累計是另一組數字：全體經常性平均 ${money(JULY.ytd.average)} 元、中位數 ${money(JULY.ytd.median)} 元。${money(JULY.total)} 元是 7 月單月的總薪資平均。</li>
+    <li>本國籍全時的 7 月：經常性平均 ${money(JULY.fullTime.average)} 元、中位數 ${money(JULY.fullTime.median)} 元、總薪資平均 ${money(JULY.fullTime.total)} 元。114 年全年全時是平均 ${money(FULL_TIME.average)} 元、中位數 ${money(FULL_TIME.median)} 元。</li>
+    <li>未滿 25 歲的 7 月平均 ${money(JULY.ages[0].average)} 元，仍低於該組中位數。這個階段的平均繼續被低薪往下拉。</li>
+    <li>這份 7 月資料把 114 年全年微調成平均 47,885 元、中位數 38,407 元，和 2 月發布差 1 元。本頁仍用 2 月的 ${money(OVERALL.average)} 與 ${money(OVERALL.median)}。</li>`
 }
 
 function renderStages() {
@@ -181,6 +259,7 @@ renderTen()
 renderTrend()
 renderBars()
 renderStages()
+renderJuly()
 bind()
 const initial = readHash()
 if (initial.age > 0 && initial.pay > 0) submit(initial.age, initial.pay)

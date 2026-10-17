@@ -1,9 +1,12 @@
 /**
- * 114 年（2025）工業及服務業受僱員工薪資。
+ * 114 年（2025）工業及服務業受僱員工薪資。這是本工具的基準。
  * 來源：行政院主計總處《薪資及生產力統計新聞稿》114 年 12 月（115 年 2 月 11 日發布），
  * 表 6 個人特性別、表 9 十等分位。114 年全年數字主計總處標為初步統計。
  * 同齡百分位的分布形狀，用 113 年全年總薪資的年齡別四分位（薪資中位數統計表 5）調整。
  * 官方沒有公布各年齡的月薪百分位，所以同齡百分比是粗估。
+ *
+ * JULY 是 115 年 7 月的單月統計（115 年 9 月 14 日發布），只供獨立比較。
+ * 查詢、及格線、十分位都不讀這組數字。7 月沒有公布十等分位。
  */
 
 export const YEAR = "114"
@@ -149,6 +152,39 @@ export function verdict(stage: Stage, salary: number): Verdict {
   if (pastAverage) return "average"
   if (pastMedian) return "median"
   return "below"
+}
+
+/**
+ * 115 年 7 月（2026 年 7 月）全體受僱員工，初步統計。
+ * 來源：主計總處《115 年 7 月工業及服務業薪資統計結果》表 1、表 2、表 5、表 6。
+ * 總薪資平均 71,165 = 經常性平均 49,491 + 非經常性 21,674。
+ * 年增率是跟上一年 7 月比，不是跟 114 年全年比。
+ * 1 至 7 月累計是另一組數字，不能拿來當這個月的創新高。
+ */
+export const JULY = {
+  average: 49_491,
+  median: 39_629,
+  irregular: 21_674,
+  overtime: 2_492,
+  total: 71_165,
+  yoy: {
+    average: 47_903,
+    median: 38_300,
+    total: 65_742,
+    averagePct: 3.32,
+    medianPct: 3.47,
+    totalPct: 8.25,
+  },
+  ytd: { average: 49_054, median: 39_341 },
+  fullTime: { average: 52_528, median: 41_397, irregular: 22_299, total: 74_827 },
+  ages: [
+    { id: "u25", average: 27_768, median: 29_769 },
+    { id: "a25", average: 41_308, median: 36_705 },
+    { id: "a30", average: 48_498, median: 40_580 },
+    { id: "a40", average: 55_416, median: 43_575 },
+    { id: "a50", average: 58_947, median: 44_378 },
+    { id: "a65", average: 49_920, median: 39_231 },
+  ],
 }
 
 export function money(n: number): string {

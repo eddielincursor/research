@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest"
 import {
   DECILES,
+  JULY,
   OVERALL,
   STAGES,
   agePercent,
@@ -77,6 +78,29 @@ describe("salary position", () => {
       expect(n).toBeGreaterThan(prev)
       prev = n
     }
+  })
+
+  it("keeps July 2026 beside the year instead of replacing it", () => {
+    expect(JULY.average + JULY.irregular).toBe(JULY.total)
+    expect(JULY.total).toBe(71_165)
+    expect(JULY.fullTime.average + JULY.fullTime.irregular).toBe(JULY.fullTime.total)
+    expect(OVERALL.average).toBe(47_884)
+    expect(OVERALL.median).toBe(38_406)
+    expect(Math.round(OVERALL.annualTotal / 12)).toBe(63_386)
+    expect(JULY.ytd.average).not.toBe(JULY.average)
+    expect(JULY.ytd.median).not.toBe(JULY.median)
+    expect(JULY.ages).toHaveLength(STAGES.length)
+    for (const s of STAGES) {
+      const month = JULY.ages.find((a) => a.id === s.id)
+      expect(month).toBeDefined()
+      expect(month!.median).toBeGreaterThan(s.median)
+      const age = s.minAge === 0 ? 22 : s.minAge
+      expect(stageOf(age).median).toBe(s.median)
+      expect(stageOf(age).average).toBe(s.average)
+    }
+    expect(JULY.ages[0].average).toBeLessThan(JULY.ages[0].median)
+    expect(agePercent(stageOf(32), 42_000).percent).toBeGreaterThan(55)
+    expect(agePercent(stageOf(32), 42_000).percent).toBeLessThan(65)
   })
 
   it("names the passing line", () => {
