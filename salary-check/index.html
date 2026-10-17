@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="用主計總處 114 年的數字，看懂平均薪資和中位數差在哪。輸入年紀和月薪，查出你在同齡的哪個位置。" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>平均薪資和中位數差在哪｜你的月薪在同齡的哪裡</title>
+  </head>
+  <body>
+    <a class="skip" href="#check">跳到薪資位置查詢</a>
+    <header class="top">
+      <div class="wrap top-inner">
+        <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>薪資位置</a>
+        <nav class="top-nav" aria-label="頁面導覽">
+          <a href="#why">為什麼</a>
+          <a href="#stages">各年齡及格線</a>
+          <a href="#check">查我的位置</a>
+          <a class="hide-sm" href="https://github.com/eddielincursor/research/blob/main/tutorials/salary-median.md">讀文章</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap">
+          <p class="eyebrow">行政院主計總處・114 年工業及服務業受僱員工</p>
+          <h1>平均月薪 4 萬 8，為什麼將近七成的人領不到？</h1>
+          <p class="lead">因為平均會被高薪的人往上拉。把所有人由低到高排好，正中間那個人的月薪，才比較像大多數人的薪水。114 年，這兩個數字差了快一萬元。</p>
+          <div class="pair" id="hero-pair">
+            <article class="big avg">
+              <span>平均數</span>
+              <b>47,884</b>
+              <small>把全部薪水加總再除以人數。新聞標題常用這個。</small>
+            </article>
+            <article class="big med">
+              <span>中位數</span>
+              <b>38,406</b>
+              <small>由低到高排好，正中間那個人。有一半的人比這個低。</small>
+            </article>
+          </div>
+          <p class="gap-line">兩個數字相差 <b>9,478 元／月</b>，一年大約 11.4 萬。達到平均的人，大約已經贏過七成的受僱員工。</p>
+        </div>
+      </section>
+
+      <section class="section" id="why" aria-labelledby="why-title">
+        <div class="wrap">
+          <p class="kicker">先看懂</p>
+          <h2 id="why-title">用 10 個人，看平均怎麼被拉高</h2>
+          <p>下面是假設的例子，方便看計算，不是真實的 10 個人。7 個人月薪 3 萬，另外 3 個人是 5.5 萬、8 萬和 14.5 萬。</p>
+          <div class="ten" id="ten"></div>
+          <div class="callouts">
+            <p><b>平均是 4.9 萬。</b>10 個人的薪水加起來 49 萬，除以 10。14.5 萬那一個人，一個人就佔了總額的三成。</p>
+            <p><b>中位數是 3 萬。</b>由低到高排好，第 5 和第 6 個人都是 3 萬。10 個人裡有 7 個人領不到平均。</p>
+          </div>
+          <p>真實世界沒有差這麼誇張，方向一樣。主計總處的統計裡，全體受僱員工低於平均的比率，從 109 年的 66.78% 升到 114 年的 <b>69.74%</b>。薪水有在漲，但領不到平均的人，一年比一年多。</p>
+          <ol class="trend" id="trend" aria-label="低於平均薪資的員工比率"></ol>
+          <p class="note">就算拿掉部分工時和外國籍員工，只看本國籍全職，114 年仍有 <b>70.30%</b> 的人低於全職自己的平均（平均 50,643 元、中位數 39,890 元）。所以不是「因為算進工讀生」才會七成領不到。</p>
+        </div>
+      </section>
+
+      <section class="section soft" id="words" aria-labelledby="words-title">
+        <div class="wrap">
+          <p class="kicker">三個容易搞混的詞</p>
+          <h2 id="words-title">新聞裡的「月薪」，常常不是你每月領到的</h2>
+          <div class="defs">
+            <article>
+              <h3>經常性薪資</h3>
+              <p>本薪，加上每月固定發的津貼和獎金。這份工具和上面的 47,884、38,406，用的都是這個。它最接近「平常每個月的薪水」。</p>
+            </article>
+            <article>
+              <h3>總薪資</h3>
+              <p>經常性薪資，再加加班費、績效獎金、年終。114 年 12 月全體總薪資平均 62,492 元，其中就有 14,092 元是加班費和獎金。看到「平均月薪 6 萬、7 萬」，先問是不是獎金月。</p>
+            </article>
+            <article>
+              <h3>實質薪資</h3>
+              <p>把物價上漲扣掉之後的薪資。114 年經常性薪資平均多了 3.09%，扣掉物價只剩 <b>1.40%</b>；中位數實質增加 1.35%。有漲，但沒有標題看起來那麼多。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="deciles" aria-labelledby="decile-title">
+        <div class="wrap">
+          <p class="kicker">全體受僱員工</p>
+          <h2 id="decile-title">由低到高，切成 10 等份</h2>
+          <p>把約 852 萬名受僱員工依月薪排好，每 10% 畫一條線。第 1 條線 28,590 元，剛好就是 114 年的最低工資，第 2 條線也只有 29,039 元。最下面兩成的人，幾乎都貼著最低工資。</p>
+          <div class="bars" id="bars" role="img" aria-label="十等分位月薪，從 28,590 元到 79,053 元"></div>
+          <p class="note">平均 47,884 元幾乎貼著第 7 條線（48,062 元）。所以「達到平均」的意思，大約是贏過七成的人，不是普通。</p>
+        </div>
+      </section>
+
+      <section class="section soft" id="stages" aria-labelledby="stage-title">
+        <div class="wrap">
+          <p class="kicker">各階段的及格線</p>
+          <h2 id="stage-title">同齡的中位數，當作及格</h2>
+          <p>這裡的「及格」不是官方標準，也不是考試。中位數的意思是：達到這條線，你就贏過大約一半的同齡受僱員工。平均數通常比較高，達到平均算前段，不是普通水準。數字是 114 年每月經常性薪資。</p>
+          <div class="stages" id="stage-list"></div>
+        </div>
+      </section>
+
+      <section class="section" id="check" aria-labelledby="check-title">
+        <div class="wrap check-grid">
+          <div>
+            <p class="kicker">小工具</p>
+            <h2 id="check-title">輸入年紀和月薪</h2>
+            <p>填薪資單上的本薪加每月固定津貼。加班費、年終、三節獎金先不要算進去，那些會讓位置看起來比較高。</p>
+            <form class="form" id="form">
+              <label class="field">
+                <span>年紀</span>
+                <span class="input"><input id="age" inputmode="numeric" autocomplete="off" aria-describedby="age-hint" /><em>歲</em></span>
+                <small id="age-hint">15 到 80 歲。階段依主計總處的年齡分組。</small>
+              </label>
+              <label class="field">
+                <span>每月經常性薪資</span>
+                <span class="input"><em>NT$</em><input id="pay" inputmode="numeric" autocomplete="off" aria-describedby="pay-hint" /></span>
+                <small id="pay-hint">不含加班費和不是每月都有的獎金。</small>
+              </label>
+              <div class="form-actions">
+                <button type="submit" class="btn primary">看我的位置</button>
+                <button type="button" class="btn" id="example">帶入 32 歲、月薪 42,000</button>
+              </div>
+              <p class="warn" id="warn" hidden></p>
+            </form>
+          </div>
+          <div class="result" id="result" aria-live="polite">
+            <p class="placeholder">填好左邊，這裡會告訴你在哪個階段、有沒有過同齡的及格線，以及大約贏過同齡的多少人。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section soft" id="limits" aria-labelledby="limits-title">
+        <div class="wrap">
+          <p class="kicker">這些數字沒有算到的人</p>
+          <h2 id="limits-title">對不到自己，通常是範圍不一樣</h2>
+          <ul class="limits">
+            <li><b>沒有算軍公教。</b>統計是工業及服務業的受僱員工，公務員、公立學校教師、軍人在另一套制度。</li>
+            <li><b>沒有算自己當老闆、接案、農林漁牧。</b>只算領薪水的受僱員工。</li>
+            <li><b>行業差很多。</b>113 年全年總薪資中位數，金融及保險業 110.6 萬、電子零組件 87.6 萬，住宿及餐飲業 41.5 萬。同齡比較會把不同行業混在一起。</li>
+            <li><b>學歷也差很多。</b>同樣是 114 年的每月經常性薪資，研究所中位數 66,667 元，專科及大學 40,605 元。</li>
+            <li><b>同齡百分比是粗估。</b>官方公布了全體的十分位，和各年齡的平均、中位數，但沒有公布各年齡的百分位。工具用 113 年各年齡全年總薪資的分布形狀來估計，請把它看成區間，不是名次。</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="wrap">
+        <p>資料來源：行政院主計總處《薪資及生產力統計新聞稿》114 年 12 月（115 年 2 月 11 日發布）表 6、表 9；113 年薪資中位數及分布統計表 3、表 5。114 年全年數字為初步統計。當時每月最低工資 28,590 元；115 年 1 月 1 日起已調整為 29,500 元，全年統計要等主計總處下次發布。</p>
+        <p>這是位置對照，不是薪資建議，也不能用來判斷一份工作值不值得。數字只留在你的瀏覽器。</p>
+        <p>延伸閱讀：<a href="https://github.com/eddielincursor/research/blob/main/tutorials/salary-median.md">平均薪資和中位數，一篇看懂</a>・<a href="https://eddielincursor.github.io/research/budget/">薪水分配試算</a>・<a href="https://eddielincursor.github.io/research/wealth-ladder/">財富階梯定位器</a></p>
+      </div>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
