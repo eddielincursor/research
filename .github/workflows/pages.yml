@@ -7,6 +7,7 @@ on:
       - "budget-lite/**"
       - "wealth-ladder/**"
       - "dinotaeng/**"
+      - "salary-check/**"
       - "site-home/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
@@ -36,6 +37,7 @@ jobs:
             budget-lite/pnpm-lock.yaml
             wealth-ladder/pnpm-lock.yaml
             dinotaeng/pnpm-lock.yaml
+            salary-check/pnpm-lock.yaml
       - name: Build budget-lite
         working-directory: budget-lite
         run: pnpm install --frozen-lockfile && pnpm test && pnpm build
@@ -45,6 +47,9 @@ jobs:
       - name: Build dinotaeng
         working-directory: dinotaeng
         run: pnpm install --frozen-lockfile && pnpm test && pnpm build
+      - name: Build salary-check
+        working-directory: salary-check
+        run: pnpm install --frozen-lockfile && pnpm test && pnpm build
       - name: Assemble site
         run: |
           mkdir -p _site
@@ -52,6 +57,7 @@ jobs:
           cp -r budget-lite/dist _site/budget
           cp -r wealth-ladder/dist _site/wealth-ladder
           cp -r dinotaeng/dist _site/dinotaeng
+          cp -r salary-check/dist _site/salary
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
